@@ -1,6 +1,6 @@
 import os
 import requests
-import httpx, base64, traceback
+import base64, traceback
 from fastapi import HTTPException
 
 # Load environment variables
@@ -33,21 +33,21 @@ def get_spotify_token():
     else:
         # print(f"Failed to get access token: {response,status_code}")
         traceback.print_exc()
-        raise HTTPException(status_code=response.status_code, detail="Failed to authenticate")
         print(response.json())
-        return None
+        raise HTTPException(status_code=response.status_code, detail="Failed to authenticate")
+        # return None
 
     
-def main():
-    try:
-        token = get_spotify_token()
-        if token:
-            print("Token retrieved")
-        else:
-            print("Failed to receive token")
-    except Exception as e:
-        traceback.print_exc()
-        print(f"Exception: {e}")
+# def main():
+#     try:
+#         token = get_spotify_token()
+#         if token:
+#             print("Token retrieved")
+#         else:
+#             print("Failed to receive token")
+#     except Exception as e:
+#         traceback.print_exc()
+#         print(f"Exception: {e}")
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
