@@ -1,5 +1,6 @@
 import os
-import requests
+from icecream import ic
+import httpx
 import base64, traceback
 from fastapi import HTTPException
 
@@ -23,7 +24,7 @@ def get_spotify_token():
         'Content-Type': 'application/x-www-form-urlencoded'
     }
     data = {'grant_type' : 'client_credentials'}
-    response = requests.post('https://accounts.spotify.com/api/token', headers=headers, data=data)
+    response = httpx.post('https://accounts.spotify.com/api/token', headers=headers, data=data)
 
     if response.status_code == 200:
         token_info = response.json()
